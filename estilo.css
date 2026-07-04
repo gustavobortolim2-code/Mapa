@@ -1,0 +1,179 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #0b1320;
+  color: rgb(241, 235, 235);
+  font-family: Arial, sans-serif;
+}
+
+header {
+  padding: 30px;
+  background: #111a2e;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+header img {
+  width: 100px;
+  height: auto;
+}
+
+.sessaoPalpites {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.sessaoPalpites p {
+  margin-top: 20px;
+}
+
+button {
+  background-color: rgb(23, 105, 177);
+  color: aliceblue;
+  width: 300px;
+  border-width: 2px;
+  border-color: aliceblue;
+  border-radius: 16px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.btn {
+  margin: 20px;
+  padding: 20px;
+}
+
+.btn:hover {
+  background: rgb(2, 87, 245);
+}
+
+section h2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sessaoRanking {
+  width: 340px;
+  max-width: 25%;
+  min-width: 250px;
+}
+
+.formUsuario label {
+  color: aliceblue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 16px;
+}
+
+form input {
+  width: 300px;
+  padding: 20px;
+  border-width: 2px;
+  border-color: rgb(23, 105, 177);
+  border-radius: 16px;
+  margin-top: 8px;
+}
+
+@media (max-width: 768px) {
+  input {
+    width: 40px;
+  }
+}
+
+form button {
+  display: block;
+  padding: 12px;
+  margin-top: 8px;
+  margin-bottom: 20px;
+}
+
+form button:hover {
+  background: rgb(2, 87, 245);
+}
+
+.mensagem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.div-mensagem {
+  padding: 20px;
+  margin-bottom: 12px;
+  text-align: center;
+  width: 640px;
+}
+
+.form-mensagem {
+  background-color: #11244d;
+  text-align: start;
+  text-indent: 10px;
+  padding: 12px;
+  border-radius: 16px;
+  margin-top: 12px;
+  display: grid;
+}
+
+.form-mensagem input {
+  padding: 12px;
+  margin-bottom: 12px;
+  width: 578px;
+}
+
+.msg {
+  justify-items: center;
+}
+
+.msg button {
+  margin-top: 12px;
+  padding: 12px;
+}
+
+.mensagemArea {
+  padding: 12px;
+  border-radius: 16px;
+  border-color: rgb(23, 105, 177);
+  border-width: 2px;
+  margin-top: 12px;
+  width: 578px;
+  height: 120px;
+}
+
+.btn-mensagem {
+  padding: 12px;
+}
+.btn-mensagem:hover {
+  background: rgb(2, 87, 245);
+}
+
+.escondido {
+  display: none !important;
+}
+
+.espaco {
+  margin-top: 100px;
+}
+
+.regra {
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 8px;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgba(240, 248, 255, 0.671);
+}

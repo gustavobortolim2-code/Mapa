@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Palpite World Cup 2026</title>
+    <link rel="stylesheet" href="estilo.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header style="display: flex">
+      <h1>Seu Palpite da Copa do Mundo 2026</h1>
+      <a
+        href="https://www.google.com/search?q=copa+do+mundo+2026&oq=co&gs_lcrp=EgZjaHJvbWUqDggBEEUYJxg7GIAEGIoFMgYIABBFGDwyDggBEEUYJxg7GIAEGIoFMg4IAhBFGCcYOxiABBiKBTIGCAMQRRg7MgYIBBBFGDwyBggFEEUYPTIGCAYQRRg8MgYIBxBFGDzSAQgyNDA3ajBqN6gCCLACAfEF3BAww_YEB5M&sourceid=chrome&ie=UTF-8"
+        target="_blank"
+      >
+        <img
+          src="logomarca-oficial-da-copa-do-mundo-de-2026-1684424286313_v2_1200x1200-removebg-preview.png"
+          alt="Logo Copa"
+        />
+      </a>
+    </header>
+    <main>
+      <section class="sessaoRanking">
+        <h2>Sua Pontuação</h2>
+        <div id="ranking" class="rank"></div>
+        <button class="classBtnRanking" id="btnRanking" aria-expanded="false">
+          Recarregar Pontuação
+        </button>
+        <p class="regra">Regras:</p>
+        <ul>
+          <li>Acertar o vencedor gera 1 ponto</li>
+          <li>Acertar o placar exato gera 3 pontos</li>
+        </ul>
+      </section>
+      <section class="sessaoPalpites">
+        <p>Escolha os vencedores dos jogos até a final!</p>
+        <button class="btn" id="btn" onclick="esconder()" aria-expanded="false">
+          Iniciar Palpites
+        </button>
+
+        <form class="formUsuario escondido" aria-hidden="true" id="formUsuario">
+          <label for="nomeUsuario">Digite o seu Nome</label>
+          <input type="text" id="nomeUsuario" placeholder="Nome" />
+
+          <button type="submit">Confirmar Nome</button>
+        </form>
+        <div
+          class="tabelaJogos escondido"
+          aria-hidden="true"
+          id="gamesContainer"
+        ></div>
+      </section>
+      <section class="mensagem">
+        <div class="espaco div-mensagem">
+          <button
+            class="btn-mensagem"
+            arai-expanded="false"
+            aria-controls="formulario-contato"
+          >
+            Fale Conosco
+          </button>
+          <form
+            class="form-mensagem escondido"
+            id="id-mensagem"
+            aria-hidden="true"
+          >
+            <label for="nomeMensagem">Nome</label>
+            <input type="text" id="nomeMensagem" placeholder="Nome" />
+
+            <label for="emailUsuario">Email</label>
+            <input type="email" id="emailUsuario" placeholder="Email" />
+
+            <label for="mensagemUsuario">Mensagem</label>
+            <textarea
+              class="mensagemArea"
+              id="mensagemUsuario"
+              placeholder="Envie sua Mensagem"
+            ></textarea>
+            <div class="msg">
+              <button type="submit">Enviar Mensagem</button>
+            </div>
+          </form>
+        </div>
+      </section>
+      <footer>&copy; Copyleft 2026</footer>
+    </main>
+    <script src="./script.js"></script>
+    <script type="module" src="./tabela.js"></script>
+    <script type="module" src="./acerto.js"></script>
+    <script type="module" src="./firebase.js"></script>
+  </body>
+</html>
