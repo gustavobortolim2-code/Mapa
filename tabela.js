@@ -1,9 +1,10 @@
 const gamesContainer = document.getElementById("gamesContainer");
 
+//fase que inicia o mata-mata da copa
 let faseAtual = "r32";
-
+//pra pegar o id do jogo
 let jogosId = {};
-
+//pra pegar as fase
 let copa = {
   r32: [],
   r16: [],
@@ -13,6 +14,7 @@ let copa = {
   final: [],
 };
 
+//traduzir os nomes que vem da API
 const traducoes = {
   Brazil: "Brasil",
   Japan: "Japão",
@@ -41,6 +43,7 @@ const traducoes = {
   Ghana: "Gana",
 };
 
+//mudar as datas que vem da API
 const dataJogos = {
   73: "28/06/2026 16:00",
   74: "29/06/2026 17:30",
@@ -85,6 +88,7 @@ const dataJogos = {
   104: "19/07/2026 16:00",
 };
 
+//retorna faseFinalizada caso todos os jogos naquela fase estejam finalizados
 const faseFinalizada = (jogos) => {
   return jogos.every((jogo) => jogo.finished === "TRUE");
 };
@@ -92,7 +96,7 @@ const faseFinalizada = (jogos) => {
 const carregarJogos = async () => {
   try {
     gamesContainer.innerHTML = "<h2>Carregando Partidas</h2>";
-
+    //pega informações na API
     const response = await fetch("https://worldcup26.ir/get/games");
     const response2 = await fetch("https://worldcup26.ir/get/teams");
 
@@ -102,11 +106,13 @@ const carregarJogos = async () => {
     console.log(jogos);
     console.log(flags);
 
+    //pega o ID de cada jogo na API
     jogos.games.forEach((jogo) => {
       jogosId[jogo.id] = jogo;
     });
 
     let botaoSalvar;
+    //inicia tudo usando a primeira fase
     if (faseAtual === "r32") {
       copa.r32 = jogos.games.filter((j) => j.type === "r32");
       botaoSalvar = renderizarJogos(copa.r32, flags.teams);
@@ -127,6 +133,7 @@ const carregarJogos = async () => {
 const renderizarJogos = (jogos, flags) => {
   gamesContainer.innerHTML = "";
 
+  //se todos os jogos estiverem finalizados da a opção de avançar pra prómixa
   if (faseFinalizada(jogos)) {
     const topo = document.createElement("div");
     topo.className = "topo";
@@ -143,16 +150,19 @@ const renderizarJogos = (jogos, flags) => {
     gamesContainer.appendChild(topo);
   }
 
+  //organiza por data
   jogos.sort((a, b) => {
     return new Date(a.local_date) - new Date(b.local_date);
   });
 
+  //pega as bandeiras de cada seleção na API
   const bandeira = {};
 
   flags.forEach((flag) => {
     bandeira[flag.name_en] = flag.flag;
   });
 
+  //pra cada jogo pega na API o time da casa e o de fora, com suas respectivas bandeiras
   jogos.forEach((jogo) => {
     const horario = dataJogos[jogo.id];
     const bandeiraCasa = bandeira[jogo.home_team_name_en] || "default.png";
@@ -160,14 +170,17 @@ const renderizarJogos = (jogos, flags) => {
     const bandeiraFora = bandeira[jogo.away_team_name_en] || "default.png";
     const fora = traducoes[jogo.away_team_name_en] || jogo.away_team_name_en;
 
+    //salva palpite no localStorage
     const salvo = JSON.parse(localStorage.getItem(`palpite-${jogo.id}`));
 
+    //cria div da partida
     const partida = document.createElement("div");
     partida.className = "partidaJogo";
     partida.dataset.id = jogo.id;
 
     const finalizado = jogo.finished === "TRUE";
 
+    //se o jogo esta finalizado imprimi o horario, nome dos times, gols, bandeiras e status finalizado
     if (finalizado) {
       partida.innerHTML = `
         <div class="data">
@@ -217,9 +230,11 @@ const renderizarJogos = (jogos, flags) => {
       </div>
     `;
 
+      //pega a quantidade de gols
       const golsCasa = partida.querySelector(".gols-casa");
       const golsFora = partida.querySelector(".gols-fora");
 
+      //verifica empate e leva pros penaltis
       const verificarEmpate = () => {
         let penalti = partida.querySelector(".penalti");
 
@@ -271,8 +286,10 @@ const renderizarJogos = (jogos, flags) => {
                 ? copa.third
                 : copa.final;
 
+    //chama calcular vencedor
     const vencedores = calcularVencedor(jogosAtuais);
 
+    //passa as fases mandando os times que ganharam
     if (faseAtual === "r32") {
       copa.r16 = gerarProximaFase(vencedores, faseAtual);
       faseAtual = "r16";
@@ -294,6 +311,7 @@ const renderizarJogos = (jogos, flags) => {
     }
   };
 
+  //salva os palpites no localStorage
   const botaoSalvar = document.createElement("button");
   botaoSalvar.textContent = "Salvar todos os Palpites";
   botaoSalvar.className = "salvar-btn";
@@ -328,6 +346,7 @@ const renderizarJogos = (jogos, flags) => {
     avancarFase(flags);
   });
 
+  //volta pro inicio
   const botaoVoltar = document.createElement("button");
   botaoVoltar.textContent = "Voltar ao Inicio";
   botaoVoltar.className = "voltar-btn";
@@ -351,6 +370,7 @@ const renderizarJogos = (jogos, flags) => {
   return botaoSalvar;
 };
 
+//verifica quem venceu o jogo
 const getVencedor = (jogo, palpite) => {
   const casa = Number(palpite.golsCasa);
   const fora = Number(palpite.golsFora);
@@ -373,6 +393,7 @@ const getVencedor = (jogo, palpite) => {
 const calcularVencedor = (jogos) => {
   const vencedores = [];
 
+  //verifica dentro da API quem venceu o jogo
   jogos.forEach((jogo) => {
     let vencedor;
 
@@ -389,6 +410,7 @@ const calcularVencedor = (jogos) => {
         }
       }
     } else {
+      //senao pega o vencedor da função getVencedor
       const palpite = JSON.parse(localStorage.getItem(`palpite-${jogo.id}`));
 
       if (!palpite) return;
@@ -404,9 +426,11 @@ const calcularVencedor = (jogos) => {
   return vencedores.map((v) => String(v));
 };
 
+//cria as proximas fases
 const gerarProximaFase = (vencedores, faseAtual) => {
   let fase = [];
 
+  //cada fase contendo a ID do confronto da API e o confronto que será gerado na proxima fase
   if (faseAtual === "r32") {
     fase = [
       {

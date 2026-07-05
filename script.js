@@ -1,3 +1,4 @@
+//contantes que pega o nome do usuario, uso dos botões e envio de formularios
 const botaoIniciar = document.querySelector(".btn");
 const tabelaJogos = document.querySelector(".tabelaJogos");
 const formUsuario = document.getElementById("formUsuario");
@@ -14,22 +15,26 @@ botaoIniciar.setAttribute(
   formUsuario.classList.contains("escondido") ? "false" : "true",
 );
 
+//muda uma classe para informações aparecerem e esconde botao
 botaoIniciar.addEventListener("click", () => {
   const isHidden = formUsuario.classList.toggle("escondido");
   botaoIniciar.setAttribute("aria-expanded", isHidden ? "false" : "true");
   botaoIniciar.textContent = isHidden ? "Iniciar Palpites" : "";
 });
 
+//esconde outro botão
 const esconder = async () => {
   document.querySelector(".btn").style.display = "none";
 };
 
+//muda uma classe para informações aparecerem e muda conteudo do botão
 btnMensagem.addEventListener("click", () => {
   const isHidden = formMensagem.classList.toggle("escondido");
   btnMensagem.setAttribute("aria-expanded", isHidden ? "false" : "true");
   btnMensagem.textContent = isHidden ? "Fale Conosco" : "Cancelar Envio";
 });
 
+//usuario coloca nome
 formUsuario.addEventListener("submit", (event) => {
   event.preventDefault();
 
@@ -46,6 +51,7 @@ formUsuario.addEventListener("submit", (event) => {
   tabelaJogos.classList.remove("escondido");
 });
 
+//salva nome no  localStorage
 const nomeSalvo = localStorage.getItem("nomeUsuario");
 
 if (nomeSalvo) {
@@ -55,6 +61,7 @@ if (nomeSalvo) {
   nomeMensagem.value = nomeSalvo;
 }
 
+//pega a mensagem, email e nome do usuario e envia para o meu contato
 const form = document.getElementById("id-mensagem");
 
 form.addEventListener("submit", async (e) => {
