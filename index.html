@@ -65,19 +65,39 @@
             id="id-mensagem"
             aria-hidden="true"
           >
+            <input
+              type="hidden"
+              name="access_key"
+              value="65808640-11b3-4a0e-b125-4a35efe06680"
+            />
+
             <label for="nomeMensagem">Nome</label>
-            <input type="text" id="nomeMensagem" placeholder="Nome" />
+            <input
+              type="text"
+              id="nomeMensagem"
+              name="name"
+              placeholder="Nome"
+              required
+            />
 
             <label for="emailUsuario">Email</label>
-            <input type="email" id="emailUsuario" placeholder="Email" />
+            <input
+              type="email"
+              name="email"
+              id="emailUsuario"
+              placeholder="Email"
+              required
+            />
 
             <label for="mensagemUsuario">Mensagem</label>
             <textarea
               class="mensagemArea"
               id="mensagemUsuario"
+              name="message"
               placeholder="Envie sua Mensagem"
+              required
             ></textarea>
-            <div class="msg">
+            <div class="enviar">
               <button type="submit">Enviar Mensagem</button>
             </div>
           </form>

@@ -131,11 +131,11 @@ form button:hover {
   width: 578px;
 }
 
-.msg {
+.enviar {
   justify-items: center;
 }
 
-.msg button {
+.enviar button {
   margin-top: 12px;
   padding: 12px;
 }
@@ -162,7 +162,7 @@ form button:hover {
 }
 
 .espaco {
-  margin-top: 100px;
+  margin-top: 160px;
 }
 
 .regra {
