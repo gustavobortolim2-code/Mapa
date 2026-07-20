@@ -515,7 +515,7 @@ const gerarProximaFase = (vencedores, faseAtual) => {
   } else if (faseAtual === "sf") {
     fase = [
       {
-        ...jogosId[103],
+        ...jogosId[104],
         home_team_name_en: vencedores[101],
         away_team_name_en: vencedores[102],
       },
