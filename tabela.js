@@ -307,7 +307,7 @@ const renderizarJogos = (jogos, flags) => {
       faseAtual = "final";
       renderizarJogos(copa.final, flags);
     } else if (faseAtual === "final") {
-      alert("🏆 Campeão: " + vencedores[103]);
+      alert("🏆 Campeão: " + vencedores[104]);
     }
   };
 
